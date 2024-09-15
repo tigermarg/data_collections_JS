@@ -3,37 +3,154 @@
 //Variables
 let string= `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
 
-//Memory allocation for future values
-let cell = ' ';
-let row = [];
+// Memory allocation for future values
+let cell = ``;
+let row = ``;
+let array = [];
 
 for(let i in string){ //for...in gives access to index numbers in index
         // console.log(string[i], i) //Tests for loop
         switch(string[i]){
             case ",":
-                // console.log(cell); //Print cell
-                row.push (cell); //Add cell to row //Changed to array method
-                cell = ''; //Emptying cell to reuse
-                // console.log(`Found comma`); //Test case 1 *work on this 2nd bc you see commas next!
+                row += cell + ' '; //Add cell to row 
+                cell = ``; //Emptying cell to reuse
                 break;
             case "\n":
-                row.push (cell); //Add final cell to row //Array
-                cell = ''; //clear cell
-                console.log(row); //Print row
-                row = []; //Clear row //Array
-                // console.log(`NewLine`); //Test case 2 *work on last to get new line
+                row += cell; //Add final cell to row 
+                array.push(row); //Add row to end of array
+                cell = ``; //clear cell
+                row = ``; //Clear row           
                 break;
             default:    
-                // console.log(string[i]); //Test case 3 *work on this 1st bc you run into char first!
                 cell += string[i]; //If char, add to current cell
                 break;
         }
     
         //If we reach final character in string, print final row
         if(i == string.length - 1){
-            //string.length is length of string - 114 - index is 114
-            row.push (cell); //Add final cell //Array 
-            console.log(row) //Print row
+            row += cell //Add final cell 
+            array.push(row) //Add row to end of array
         }
     }
 
+                console.log(array)
+
+
+// Part 2: Expanding Functionality--------------------------------------------------------------------------------
+// Declare a variable that stores the number of columns in each row of data within the CSV.
+// Instead of hard-coding four columns per row, expand your code to accept any number of columns. This should be calculated dynamically based on the first row of data.
+
+// Store your results in a two-dimensional array.
+// Each row should be its own array, with individual entries for each column.
+// Each row should be stored in a parent array, with the heading row located at index 0.
+// Cache this two-dimensional array in a variable for later use.
+
+//Memory allocation for future values
+let cell = ``;
+let row = [];
+let array = []
+
+for(let i in string){ //for...in gives access to index numbers in index
+        switch(string[i]){
+            case ",":
+                row.push (cell); //Add cell to end of row
+                cell = ''; //Emptying cell to reuse
+                break;
+            case "\n":
+                row.push (cell); //Add final cell to end of row
+                cell = ''; //clear cell
+                array.push(row); //Add row to end of array
+                row = []; //Clear row //Array
+                break;
+            default:    
+                cell += string[i]; //If char, add to current cell
+                break;
+        }
+    
+        //If we reach final character in string, print final row
+        if(i == string.length - 1){
+            row.push (cell); //Add final cell to end of row
+            array.push(row) //Add row to array
+        }
+    }
+
+    console.log(array)
+
+    let column = row.length //Number of columns in each row
+    console.log(column)
+
+// Part 3: Transforming Data -----------------------------------------------------------------------
+
+let arr = [
+    ["ID", "Name", "Occupation", "Age"],
+    ["42", "Bruce", "Knight", "41"],
+    ["57", "Bob", "Fry Cook", "19"],
+    ["63", "Blaine", "Quiz Master", "58"],
+    ["98", "Bill", "Doctor’s Assistant", "26"]
+]
+
+
+let delHeadings= arr.shift() //remove 1st row (headers) from array
+let key = ["id", "name", "occupation", "age"] //create new array for headers
+
+let object = {}
+let array = []
+
+for(let i = 0; i < arr.length; i++) {
+    object[key[i]] = arr[0][i];
+} console.log (object)
+    for(let i = 0; i < arr.length; i++) {
+        object[key[i]] = arr[1][i];
+    } console.log(object)
+        for(let i = 0; i < arr.length; i++) {
+            object[key[i]] = arr[2][i];
+        } console.log(object)
+            for(let i = 0; i < arr.length; i++) {
+                object[key[i]] = arr[3][i];
+            } console.log(object)
+
+// Part 4: -------------------------------------------------------------------------------
+
+let arr = [
+        { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+        { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+        { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+        { id: "98", name: "Bill", occupation: "Doctor’s Assistant", age: "26" },
+]
+
+// //1. Remove the last element from the sorted array.
+// //2. Insert the following object at index 1:
+//         // { id: "48", name: "Barry", occupation: "Runner", age: "25" }
+// //3. Add the following object to the end of the array:
+//         // { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+
+let newIndex1 = { id: "48", name: "Barry", occupation: "Runner", age: "25" }
+let newIndexEnd = { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+
+arr.pop(); //remove last element
+arr.splice(1, 0, newIndex1); //insert object at index 1
+arr.push(newIndexEnd) //add to end of array
+
+console.log(arr)
+
+// Finally, use the values of each object within the array and the array’s length property to calculate the average age of the group. This calculation should be accomplished using a loop.
+
+let age = [41, 25, 19, 58, 111]
+let sum = 0
+
+for(let i = 0; i < age.length; i++){
+     sum += age[i]; //sum = 524
+}{
+   console.log(sum / age.length) //sum divided by age.length (5) //average = 50.8
+}
+
+
+// Part 5: Full Circle------------------------------------------------------------------------------------------------
+
+let data = [
+        { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
+        { id: "48", name: "Barry", occupation: "Runner", age: "25" },
+        { id: "57", name: "Bob", occupation: "Fry Cook", age: "19" },
+        { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
+        { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+]
