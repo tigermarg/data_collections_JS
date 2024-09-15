@@ -45,6 +45,9 @@ for(let i in string){ //for...in gives access to index numbers in index
 // Each row should be stored in a parent array, with the heading row located at index 0.
 // Cache this two-dimensional array in a variable for later use.
 
+//Variables
+let string= `ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26`
+
 //Memory allocation for future values
 let cell = ``;
 let row = [];
@@ -76,10 +79,15 @@ for(let i in string){ //for...in gives access to index numbers in index
 
     console.log(array)
 
+
     let column = row.length //Number of columns in each row
-    console.log(column)
+    console.log(`Total columns in row`, column)
 
 // Part 3: Transforming Data -----------------------------------------------------------------------
+// For each row of data in the result array produced by your code above, create an object where the key of each value is the heading for that value’s column.
+// Convert these keys to all lowercase letters for consistency.
+// Store these objects in an array, in the order that they were originally listed.
+// Since the heading for each column will be stored in the object keys, you do not need to create an object for the heading row itself.
 
 let arr = [
     ["ID", "Name", "Occupation", "Age"],
@@ -94,18 +102,18 @@ let delHeadings= arr.shift() //remove 1st row (headers) from array
 let key = ["id", "name", "occupation", "age"] //create new array for headers
 
 let object = {}
-let array = []
+let newArr = []
 
 for(let i = 0; i < arr.length; i++) {
-    object[key[i]] = arr[0][i];
+    object[key[i]] = arr[0][i]; //key = valuex in index 0
 } console.log (object)
-    for(let i = 0; i < arr.length; i++) {
+    for(let i = 0; i < arr.length; i++) { //key = values in index 1
         object[key[i]] = arr[1][i];
     } console.log(object)
-        for(let i = 0; i < arr.length; i++) {
+        for(let i = 0; i < arr.length; i++) { //key = values in index 2
             object[key[i]] = arr[2][i];
         } console.log(object)
-            for(let i = 0; i < arr.length; i++) {
+            for(let i = 0; i < arr.length; i++) { //key = values in index3
                 object[key[i]] = arr[3][i];
             } console.log(object)
 
@@ -118,11 +126,11 @@ let arr = [
         { id: "98", name: "Bill", occupation: "Doctor’s Assistant", age: "26" },
 ]
 
-// //1. Remove the last element from the sorted array.
-// //2. Insert the following object at index 1:
-//         // { id: "48", name: "Barry", occupation: "Runner", age: "25" }
-// //3. Add the following object to the end of the array:
-//         // { id: "7", name: "Bilbo", occupation: "None", age: "111" }
+//1. Remove the last element from the sorted array.
+//2. Insert the following object at index 1:
+        // { id: "48", name: "Barry", occupation: "Runner", age: "25" }
+//3. Add the following object to the end of the array:
+        // { id: "7", name: "Bilbo", occupation: "None", age: "111" }
 
 let newIndex1 = { id: "48", name: "Barry", occupation: "Runner", age: "25" }
 let newIndexEnd = { id: "7", name: "Bilbo", occupation: "None", age: "111" }
@@ -141,12 +149,12 @@ let sum = 0
 for(let i = 0; i < age.length; i++){
      sum += age[i]; //sum = 524
 }{
-   console.log(sum / age.length) //sum divided by age.length (5) //average = 50.8
+   console.log(`Average age`, sum / age.length) //sum divided by age.length (5) //average = 50.8
 }
 
 
 // Part 5: Full Circle------------------------------------------------------------------------------------------------
-
+// As a final task, transform the final set of data back into CSV format.
 let data = [
         { id: "42", name: "Bruce", occupation: "Knight", age: "41" },
         { id: "48", name: "Barry", occupation: "Runner", age: "25" },
@@ -154,3 +162,23 @@ let data = [
         { id: "63", name: "Blaine", occupation: "Quiz Master", age: "58" },
         { id: "7", name: "Bilbo", occupation: "None", age: "111" }
 ]
+
+let string = [
+[
+    "id",   //Keys(headers) into arrays
+    "name",
+    "occupation",
+    "age"
+    ],
+    ...data.map(header => [ //values into arrays
+    header.id,
+    header.name,
+    header.occupation,
+    header.age
+    ])
+]
+    .map(i => i.join(","))  //Map through row arrays & turn arrays into strings using comma as delimeter
+    .join() //Turn into a single string //
+    // .join("\n") //Omitted \n escape character as delimeter--running this breaks to a new line
+
+console.log(string)
