@@ -97,25 +97,29 @@ let arr = [
     ["98", "Bill", "Doctor’s Assistant", "26"]
 ]
 
-
 let delHeadings= arr.shift() //remove 1st row (headers) from array
 let key = ["id", "name", "occupation", "age"] //create new array for headers
 
-let object = {}
-let newArr = []
+let row1 = {} //Turn array of rows into objects
+let row2 = {}
+let row3 = {}
+let row4 = {}
+let newArr = [] //Push objects into single array
 
 for(let i = 0; i < arr.length; i++) {
-    object[key[i]] = arr[0][i]; //key = valuex in index 0
-} console.log (object)
-    for(let i = 0; i < arr.length; i++) { //key = values in index 1
-        object[key[i]] = arr[1][i];
-    } console.log(object)
-        for(let i = 0; i < arr.length; i++) { //key = values in index 2
-            object[key[i]] = arr[2][i];
-        } console.log(object)
-            for(let i = 0; i < arr.length; i++) { //key = values in index3
-                object[key[i]] = arr[3][i];
-            } console.log(object)
+    row1[key[i]] = arr[0][i]; // key = values in index 0
+} newArr.unshift(row1)   //Add object to beginning of array
+    for(let i = 0; i < arr.length; i++) { 
+        row2[key[i]] = arr[1][i];    //key = values in index 1
+    } newArr.push(row2)  //Add to end of array
+        for(let i = 0; i < arr.length; i++) { 
+            row3[key[i]] = arr[2][i];    //key = values in index 2
+        } newArr.push(row3) //Add to end of array
+            for(let i = 0; i < arr.length; i++) { 
+                row4[key[i]] = arr[3][i];    //key = values in index3
+            } newArr.push(row4) //Add to end of array
+
+            console.log(newArr)
 
 // Part 4: -------------------------------------------------------------------------------
 
